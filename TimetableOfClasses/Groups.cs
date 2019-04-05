@@ -64,6 +64,9 @@ namespace TimetableOfClasses
 			DataGridViewColumn oldColumn = DG_Group.SortedColumn;
 			ListSortDirection direction;
 
+			if (DG_Group.Rows == null)
+			{ 
+
 			DataRow Row = ((DataRowView)DG_Group.SelectedRows[0].DataBoundItem).Row;
 
 			if (oldColumn != null)
@@ -95,6 +98,7 @@ namespace TimetableOfClasses
 				{
 					DG_Group.Rows[i].Selected = true;
 				}
+			}
 			}
 		}
 

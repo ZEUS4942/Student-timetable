@@ -53,36 +53,39 @@ namespace TimetableOfClasses
 			DataGridViewColumn oldColumn = DG.SortedColumn;
 			ListSortDirection direction;
 
-			DataRow Row = ((DataRowView)DG.SelectedRows[0].DataBoundItem).Row;
-
-			if (oldColumn != null)
+			if (DG.Rows == null)
 			{
-				if (oldColumn == newColumn &&
-					DG.SortOrder == SortOrder.Ascending)
+				DataRow Row = ((DataRowView)DG.SelectedRows[0].DataBoundItem).Row;
+
+				if (oldColumn != null)
 				{
-					direction = ListSortDirection.Descending;
+					if (oldColumn == newColumn &&
+						DG.SortOrder == SortOrder.Ascending)
+					{
+						direction = ListSortDirection.Descending;
+					}
+					else
+					{
+						direction = ListSortDirection.Ascending;
+						oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
+					}
 				}
 				else
 				{
 					direction = ListSortDirection.Ascending;
-					oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
 				}
-			}
-			else
-			{
-				direction = ListSortDirection.Ascending;
-			}
 
-			DG.Sort(newColumn, direction);
-			Recount();
+				DG.Sort(newColumn, direction);
+				Recount();
 
-			for (int i = 0; i < DG.RowCount; i++)
-			{
-
-				DataRow tmpRow = ((DataRowView)DG.Rows[i].DataBoundItem).Row;
-				if ((Guid)Row.ItemArray[0] == (Guid)tmpRow.ItemArray[0])
+				for (int i = 0; i < DG.RowCount; i++)
 				{
-					DG.Rows[i].Selected = true;
+
+					DataRow tmpRow = ((DataRowView)DG.Rows[i].DataBoundItem).Row;
+					if ((Guid)Row.ItemArray[0] == (Guid)tmpRow.ItemArray[0])
+					{
+						DG.Rows[i].Selected = true;
+					}
 				}
 			}
 		}
