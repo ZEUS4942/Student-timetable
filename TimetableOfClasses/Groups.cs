@@ -36,8 +36,6 @@ namespace TimetableOfClasses
 					}
 				}
 			}
-
-
 		}
 
 		private void AddRow(object sender, EventArgs e)

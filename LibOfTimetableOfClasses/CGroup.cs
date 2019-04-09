@@ -19,63 +19,57 @@ namespace LibOfTimetableOfClasses
 			column.ColumnName = "Position";
 			column.ReadOnly = false;
 			table.Columns.Add(column);
-			keys[0] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(string);
 			column.ColumnName = "Group";
 			column.ReadOnly = true;
+			column.Unique = true;
 			table.Columns.Add(column);
-			keys[1] = column;
+
+			keys[0] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(ushort);
 			column.ColumnName = "Semestr";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[2] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(string);
 			column.ColumnName = "Specialty";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[3] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(ushort);
 			column.ColumnName = "Shift";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[4] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(ushort);
 			column.ColumnName = "Students";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[5] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(ushort);
 			column.ColumnName = "MinNumberOfClass";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[6] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(ushort);
 			column.ColumnName = "MaxNumberOfClass";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[7] = column;
 
 			column = new DataColumn();
 			column.DataType = typeof(string);
 			column.ColumnName = "Weekends";
 			column.ReadOnly = true;
 			table.Columns.Add(column);
-			keys[8] = column;
 
 			table.PrimaryKey = keys;
 		}
@@ -107,7 +101,7 @@ namespace LibOfTimetableOfClasses
 		{
 			foreach (DataRow Row in table.Rows)
 			{
-				if (mGroup.Group == (string)Row["Group"] && mGroup.Semester == (ushort)Row["Semestr"])
+				if (mGroup.Group == (string)Row["Group"])
 					return false;
 			}
 			return true;
@@ -179,6 +173,15 @@ namespace LibOfTimetableOfClasses
 
 			}
 			return false;
+		}
+		public  bool Update(Model model, DataRow row)
+		{
+
+			MGroup mGroup = (MGroup)model;
+			table.Rows[0]["Group"] = row;
+			return true;
+			// По заданию мне было велено организовывать проверку на совпадение старой и новой строки группы не здесь,так что пусть всё время возвращает истину.
+			//Делал по заданию.
 		}
 	}
 }

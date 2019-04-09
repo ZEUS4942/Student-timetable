@@ -16,6 +16,7 @@ namespace TimetableOfClasses
 	{
 
 		private MGroup group;
+		private DataRow newRow;
 
 		public AddGroup()
 		{
@@ -37,6 +38,13 @@ namespace TimetableOfClasses
 			tbVixodnie.Text = mGroup.Weekends;
 			this.Text = "Изменение группы";
 			group = mGroup;
+		}
+
+		public AddGroup(DataRow row) 
+		{
+			InitializeComponent();
+			newRow = row;
+			group.Group = (string)row["Group"];
 		}
 
 		private void B_Сancel_Click(object sender, EventArgs e)
@@ -72,17 +80,28 @@ namespace TimetableOfClasses
 								}
 								else
 								{
-									group.Group = tbNameGroup.Text;
-									group.Semester = semest;
-									group.Specialty = tbNaprav.Text;
-									group.Shift = smena;
-									group.Students = countStudents;
-									group.MinNumberOfClass = minPar;
-									group.MaxNumberOfClass = maxPar;
-									group.Weekends = tbVixodnie.Text;
-									if (Controllers.CGroup.Update(group))
-										return true;
-									else errors = "Невозможно так изменить эту группу";
+									if (group.Group == tbNameGroup.Text)
+									{
+										group.Group = tbNameGroup.Text;
+										group.Semester = semest;
+										group.Specialty = tbNaprav.Text;
+										group.Shift = smena;
+										group.Students = countStudents;
+										group.MinNumberOfClass = minPar;
+										group.MaxNumberOfClass = maxPar;
+										group.Weekends = tbVixodnie.Text;
+										if (Controllers.CGroup.Update(group))
+											return true;
+										else errors = "Невозможно так изменить эту группу";
+									}
+									else
+									{
+									//	newRow = ; Что класть в этот проклятый newRow типа DataRow ,если в этом классе есть только переменная group ,в который все
+									// поля типа string
+										if (Controllers.CGroup.Update(group,newRow))
+											return true;
+										else errors = "Невозможно так изменить эту группу";
+									}
 								}
 							}
 							else errors = "Введите корректное максимальное количество пар!";
