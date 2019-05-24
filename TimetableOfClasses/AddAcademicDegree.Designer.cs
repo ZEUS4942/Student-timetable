@@ -91,6 +91,7 @@
 			// Reduction
 			// 
 			this.Reduction.Location = new System.Drawing.Point(13, 30);
+			this.Reduction.MaxLength = 25;
 			this.Reduction.Name = "Reduction";
 			this.Reduction.Size = new System.Drawing.Size(260, 20);
 			this.Reduction.TabIndex = 7;
@@ -100,6 +101,7 @@
 			// FullName
 			// 
 			this.FullName.Location = new System.Drawing.Point(13, 84);
+			this.FullName.MaxLength = 25;
 			this.FullName.Name = "FullName";
 			this.FullName.Size = new System.Drawing.Size(260, 20);
 			this.FullName.TabIndex = 8;

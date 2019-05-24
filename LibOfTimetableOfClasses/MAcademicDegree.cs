@@ -47,9 +47,9 @@ namespace LibOfTimetableOfClasses
 			set
 			{
 				if (value[0] == '.')
-					throw new Exception("Точка ставится после слова");
-				if (value.Length > 25)
-					throw new Exception("Недопустимое количество символов");
+					throw new Exception();
+				if (value[0] == '-')
+					throw new Exception();
 				_fullname = value;
 			}
 		}
@@ -63,9 +63,9 @@ namespace LibOfTimetableOfClasses
 			set
 			{
 				if (value[0] == '.')
-					throw new Exception("Точка ставится после слова");
-				if (value.Length > 25)
-					throw new Exception("Недопустимое количество символов");
+					throw new Exception();
+				if (value[0] == '-')
+					throw new Exception();
 				_reduction = value;
 			}
 		}
